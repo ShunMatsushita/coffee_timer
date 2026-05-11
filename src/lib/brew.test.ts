@@ -11,17 +11,17 @@ describe("buildBrewSchedule", () => {
   it("builds the default 5-pour schedule", () => {
     const schedule = buildBrewSchedule(defaultRecipeSettings);
 
-    expect(schedule.totalWaterGram).toBe(320);
+    expect(schedule.totalWaterGram).toBe(300);
     expect(schedule.temperatureLabel).toBe("88〜92℃");
     expect(schedule.steps.map((step) => step.startSeconds)).toEqual([
       0, 45, 90, 135, 180, 225,
     ]);
     expect(schedule.steps.map((step) => step.waterGram)).toEqual([
-      64,
-      64,
-      64,
-      64,
-      64,
+      60,
+      60,
+      60,
+      60,
+      60,
       undefined,
     ]);
     expect(schedule.steps.at(-1)?.label).toBe("ドリッパーを外す");
@@ -48,12 +48,12 @@ describe("buildBrewSchedule", () => {
   it("uses the 4-pour timings and dark roast temperature", () => {
     const schedule = buildBrewSchedule({
       beansGram: 20,
-      ratio: 17,
+      ratio: 14,
       pourCount: 4,
       roastLevel: "dark",
     });
 
-    expect(schedule.totalWaterGram).toBe(340);
+    expect(schedule.totalWaterGram).toBe(280);
     expect(schedule.steps.map((step) => step.startSeconds)).toEqual([
       0, 50, 100, 150, 200,
     ]);
@@ -90,16 +90,29 @@ describe("readRecipeSettings", () => {
       readRecipeSettings(
         JSON.stringify({
           beansGram: 22,
-          ratio: 17,
+          ratio: 14,
           pourCount: 4,
           roastLevel: "dark",
         }),
       ),
     ).toEqual({
       beansGram: 22,
-      ratio: 17,
+      ratio: 14,
       pourCount: 4,
       roastLevel: "dark",
     });
+  });
+
+  it("rejects the removed 1:17 ratio", () => {
+    expect(
+      readRecipeSettings(
+        JSON.stringify({
+          beansGram: 22,
+          ratio: 17,
+          pourCount: 4,
+          roastLevel: "dark",
+        }),
+      ),
+    ).toEqual(defaultRecipeSettings);
   });
 });

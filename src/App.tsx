@@ -14,7 +14,7 @@ import {
   type ViewMode,
 } from "./lib/brew";
 
-const ratioOptions: BrewRatio[] = [15, 16, 17];
+const ratioOptions: BrewRatio[] = [14, 15, 16];
 const pourCountOptions: PourCount[] = [4, 5, 6];
 const roastOptions: Array<{ value: RoastLevel; label: string }> = [
   { value: "light", label: "浅煎り" },

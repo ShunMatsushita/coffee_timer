@@ -1,4 +1,4 @@
-export type BrewRatio = 15 | 16 | 17;
+export type BrewRatio = 14 | 15 | 16;
 export type PourCount = 4 | 5 | 6;
 export type RoastLevel = "light" | "medium" | "dark";
 export type ViewMode = "settings" | "timer";
@@ -31,7 +31,7 @@ export const recipeStorageKey = "coffee46Timer.recipe.v1";
 
 export const defaultRecipeSettings: RecipeSettings = {
   beansGram: 20,
-  ratio: 16,
+  ratio: 15,
   pourCount: 5,
   roastLevel: "medium",
 };
@@ -156,7 +156,7 @@ export function serializeRecipeSettings(settings: RecipeSettings): string {
 }
 
 function isBrewRatio(value: unknown): value is BrewRatio {
-  return value === 15 || value === 16 || value === 17;
+  return value === 14 || value === 15 || value === 16;
 }
 
 function isPourCount(value: unknown): value is PourCount {
