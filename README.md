@@ -34,6 +34,13 @@ https://ShunMatsushita.github.io/coffee_timer/
 
 Viteの `base` は実リポジトリ名に合わせて `/coffee_timer/` に設定しています。
 
+## CI/CD
+
+このリポジトリには2つのGitHub Actions workflowがあります。
+
+- `CI`: `main` へのpushとpull requestで `npm ci`、`npm test`、`npm run build` を実行します。
+- `Deploy to GitHub Pages`: `main` へのpushで `npm ci`、`npm test`、`npm run build` を実行し、成功した `dist` をGitHub Pagesへデプロイします。
+
 ## よくあるトラブル
 
 画面が真っ白になる場合:
