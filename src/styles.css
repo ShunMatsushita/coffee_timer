@@ -1,6 +1,6 @@
 :root {
-  color: #f5f5f7;
-  background: #0f1012;
+  color: #1d1d1f;
+  background: #f7f5f2;
   font-family:
     -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter,
     ui-sans-serif, system-ui, "Segoe UI",
@@ -20,8 +20,8 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background:
-    radial-gradient(circle at 50% -10%, rgba(255, 255, 255, 0.15), transparent 34%),
-    linear-gradient(180deg, #202126 0%, #111216 54%, #08090b 100%);
+    radial-gradient(circle at 50% -12%, rgba(255, 138, 0, 0.12), transparent 32%),
+    linear-gradient(180deg, #ffffff 0%, #f7f5f2 56%, #f2efea 100%);
 }
 
 button,
@@ -51,7 +51,7 @@ button {
 
 .eyebrow {
   margin: 0 0 2px;
-  color: #9a9aa2;
+  color: #8f8a84;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -59,7 +59,7 @@ button {
 
 h1 {
   margin: 0;
-  color: #ffffff;
+  color: #1d1d1f;
   font-size: 1.55rem;
   font-weight: 760;
   letter-spacing: 0;
@@ -71,10 +71,10 @@ h1 {
   grid-auto-flow: column;
   gap: 3px;
   padding: 3px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid #e7e2dc;
   border-radius: 8px;
-  background: rgba(118, 118, 128, 0.18);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: none;
 }
 
 .view-switch button,
@@ -82,7 +82,7 @@ h1 {
   min-height: 34px;
   padding: 0 10px;
   border-radius: 6px;
-  color: #e5e5ea;
+  color: #6e6a65;
   background: transparent;
   font-size: 0.86rem;
   font-weight: 650;
@@ -95,11 +95,9 @@ h1 {
 
 .view-switch .active,
 .segments .selected {
-  color: #111216;
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  color: #ff7a00;
+  background: #fff7ef;
+  box-shadow: inset 0 0 0 1px rgba(255, 138, 0, 0.24);
 }
 
 .screen {
@@ -120,7 +118,7 @@ h1 {
 
 .field span,
 .field legend {
-  color: #c7c7cc;
+  color: #5f5a54;
   font-size: 0.9rem;
   font-weight: 650;
 }
@@ -138,19 +136,17 @@ h1 {
   gap: 10px;
   min-height: 52px;
   padding: 0 14px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid #e7e2dc;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.085);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    0 18px 42px rgba(0, 0, 0, 0.16);
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: none;
 }
 
 .number-input input {
   width: 100%;
   border: 0;
   outline: 0;
-  color: #ffffff;
+  color: #1d1d1f;
   background: transparent;
   font-size: 1.82rem;
   font-weight: 760;
@@ -168,23 +164,21 @@ h1 {
   gap: 4px;
   min-height: 68px;
   padding: 11px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid #e7e2dc;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.085);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    0 18px 42px rgba(0, 0, 0, 0.16);
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: none;
 }
 
 .metric span,
 .step span {
-  color: #a1a1a8;
+  color: #8f8a84;
   font-size: 0.76rem;
   font-weight: 650;
 }
 
 .metric strong {
-  color: #ffffff;
+  color: #1d1d1f;
   font-size: 1.44rem;
   font-weight: 780;
   line-height: 1.1;
@@ -202,10 +196,10 @@ h1 {
   align-items: start;
   min-height: 50px;
   padding: 7px 8px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid #e7e2dc;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.068);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.62);
+  box-shadow: none;
 }
 
 .step div,
@@ -216,33 +210,29 @@ h1 {
 }
 
 .step strong {
-  color: #f5f5f7;
+  color: #2c2926;
   font-size: 0.8rem;
   font-weight: 700;
 }
 
 .step p {
   justify-items: start;
-  color: #ffffff;
+  color: #1d1d1f;
   font-size: 0.92rem;
   font-weight: 780;
 }
 
 .step small {
-  color: #8e8e93;
+  color: #8f8a84;
   font-size: 0.7rem;
   font-weight: 600;
   display: none;
 }
 
 .active-step {
-  border-color: rgba(10, 132, 255, 0.62);
-  background:
-    linear-gradient(180deg, rgba(10, 132, 255, 0.16), rgba(10, 132, 255, 0.08)),
-    rgba(255, 255, 255, 0.08);
-  box-shadow:
-    0 0 0 1px rgba(10, 132, 255, 0.12) inset,
-    0 14px 34px rgba(10, 132, 255, 0.14);
+  border-color: rgba(255, 138, 0, 0.58);
+  background: #fff7ef;
+  box-shadow: inset 0 0 0 1px rgba(255, 138, 0, 0.14);
 }
 
 .primary-action,
@@ -250,12 +240,10 @@ h1 {
   min-height: 48px;
   border-radius: 8px;
   color: #ffffff;
-  background: #0a84ff;
+  background: #ff8a00;
   font-size: 1rem;
   font-weight: 760;
-  box-shadow:
-    0 16px 34px rgba(10, 132, 255, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.24);
+  box-shadow: 0 10px 24px rgba(255, 138, 0, 0.22);
   transition:
     filter 160ms ease,
     transform 160ms ease;
@@ -278,14 +266,12 @@ h1 {
   gap: 10px;
   min-height: 250px;
   padding: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid #e7e2dc;
   border-radius: 8px;
   background:
-    radial-gradient(circle at 50% 8%, rgba(10, 132, 255, 0.24), transparent 46%),
-    rgba(255, 255, 255, 0.085);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    0 24px 60px rgba(0, 0, 0, 0.22);
+    radial-gradient(circle at 50% 8%, rgba(255, 138, 0, 0.08), transparent 45%),
+    rgba(255, 255, 255, 0.78);
+  box-shadow: none;
 }
 
 .timer-ring {
@@ -295,17 +281,17 @@ h1 {
   aspect-ratio: 1;
   border-radius: 50%;
   background:
-    radial-gradient(circle, rgba(12, 13, 16, 0.96) 58%, transparent 59%),
-    conic-gradient(#0a84ff var(--progress), rgba(118, 118, 128, 0.24) 0);
+    radial-gradient(circle, #ffffff 58%, transparent 59%),
+    conic-gradient(#ff8a00 var(--progress), #ebe5de 0);
   box-shadow:
-    0 18px 50px rgba(10, 132, 255, 0.2),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    0 10px 30px rgba(255, 138, 0, 0.12),
+    inset 0 0 0 1px #e7e2dc;
 }
 
 .timer-ring.complete {
   background:
-    radial-gradient(circle, rgba(12, 13, 16, 0.96) 58%, transparent 59%),
-    conic-gradient(#30d158 var(--progress), rgba(118, 118, 128, 0.24) 0);
+    radial-gradient(circle, #ffffff 58%, transparent 59%),
+    conic-gradient(#ff8a00 var(--progress), #ebe5de 0);
 }
 
 .timer-ring-core {
@@ -317,21 +303,18 @@ h1 {
   place-content: center;
   border-radius: 50%;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025)),
-    #111216;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 -12px 28px rgba(0, 0, 0, 0.22);
+    linear-gradient(180deg, #ffffff, #fbfaf8);
+  box-shadow: inset 0 0 0 1px #eee9e3;
 }
 
 .timer-label {
-  color: #64d2ff;
+  color: #ff7a00;
   font-size: 0.82rem;
   font-weight: 760;
 }
 
 .timer-ring-core strong {
-  color: #ffffff;
+  color: #1d1d1f;
   font-size: clamp(2.6rem, 17vw, 4.2rem);
   font-weight: 780;
   line-height: 0.95;
@@ -339,7 +322,7 @@ h1 {
 }
 
 .timer-ring-core small {
-  color: #8e8e93;
+  color: #8f8a84;
   font-size: 0.74rem;
   font-weight: 700;
 }
@@ -356,20 +339,20 @@ h1 {
   gap: 2px;
   min-height: 58px;
   padding: 10px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid #e7e2dc;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.68);
 }
 
 .timer-stats span {
-  color: #8e8e93;
+  color: #8f8a84;
   font-size: 0.74rem;
   font-weight: 700;
 }
 
 .timer-stats strong {
   margin: 0;
-  color: #f5f5f7;
+  color: #1d1d1f;
   font-size: 1.16rem;
   font-weight: 780;
 }
@@ -381,11 +364,10 @@ h1 {
 }
 
 .timer-controls button:last-child {
-  color: #f5f5f7;
-  background: rgba(118, 118, 128, 0.24);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    0 14px 32px rgba(0, 0, 0, 0.14);
+  color: #4f4a44;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid #e7e2dc;
+  box-shadow: none;
 }
 
 @media (min-width: 720px) {
