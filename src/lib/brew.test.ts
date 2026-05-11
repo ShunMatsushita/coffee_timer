@@ -4,6 +4,7 @@ import {
   defaultRecipeSettings,
   formatTime,
   getActiveStepIndex,
+  getPourMarkers,
   getTimerProgress,
   readRecipeSettings,
 } from "./brew";
@@ -91,6 +92,20 @@ describe("getTimerProgress", () => {
 
   it("returns 100 when finish time is zero", () => {
     expect(getTimerProgress(10, 0)).toBe(100);
+  });
+});
+
+describe("getPourMarkers", () => {
+  it("returns pour steps as clamped progress markers", () => {
+    const schedule = buildBrewSchedule(defaultRecipeSettings);
+
+    expect(getPourMarkers(schedule.steps, schedule.finishSeconds)).toEqual([
+      { id: "pour-1", label: "1", progress: 0 },
+      { id: "pour-2", label: "2", progress: 20 },
+      { id: "pour-3", label: "3", progress: 40 },
+      { id: "pour-4", label: "4", progress: 60 },
+      { id: "pour-5", label: "5", progress: 80 },
+    ]);
   });
 });
 

@@ -3,6 +3,7 @@ import {
   buildBrewSchedule,
   formatTime,
   getActiveStepIndex,
+  getPourMarkers,
   getTimerProgress,
   readRecipeSettings,
   recipeStorageKey,
@@ -37,6 +38,7 @@ export default function App() {
   const activeStepIndex = getActiveStepIndex(schedule.steps, elapsedSeconds);
   const activeStep = schedule.steps[activeStepIndex];
   const progress = getTimerProgress(elapsedSeconds, schedule.finishSeconds);
+  const pourMarkers = getPourMarkers(schedule.steps, schedule.finishSeconds);
   const nextPour = schedule.steps
     .slice(activeStepIndex)
     .find((step) => step.type === "pour" && step.startSeconds >= elapsedSeconds);
@@ -141,6 +143,7 @@ export default function App() {
           onPause={pauseTimer}
           onReset={resetTimer}
           onStart={startTimer}
+          pourMarkers={pourMarkers}
           schedule={schedule}
           progress={progress}
           status={timerStatus}
@@ -280,6 +283,7 @@ type TimerScreenProps = {
   onPause: () => void;
   onReset: () => void;
   onStart: () => void;
+  pourMarkers: ReturnType<typeof getPourMarkers>;
   progress: number;
   schedule: ReturnType<typeof buildBrewSchedule>;
   status: TimerStatus;
@@ -293,6 +297,7 @@ function TimerScreen({
   onPause,
   onReset,
   onStart,
+  pourMarkers,
   progress,
   schedule,
   status,
@@ -308,6 +313,25 @@ function TimerScreen({
           className={status === "completed" ? "timer-ring complete" : "timer-ring"}
           style={ringStyle}
         >
+          <div className="pour-markers" aria-hidden="true">
+            {pourMarkers.map((marker) => (
+              <span
+                className={
+                  marker.id === activeStepId
+                    ? "pour-marker active-marker"
+                    : "pour-marker"
+                }
+                key={marker.id}
+                style={
+                  {
+                    "--marker-progress": `${marker.progress}%`,
+                  } as CSSProperties
+                }
+              >
+                {marker.label}
+              </span>
+            ))}
+          </div>
           <div className="timer-ring-core">
             <span className="timer-label">
               {status === "completed" ? "抽出完了" : activeStepLabel}

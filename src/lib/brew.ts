@@ -27,6 +27,12 @@ export type BrewSchedule = {
   finishSeconds: number;
 };
 
+export type PourMarker = {
+  id: string;
+  label: string;
+  progress: number;
+};
+
 export const recipeStorageKey = "coffee46Timer.recipe.v1";
 
 export const defaultRecipeSettings: RecipeSettings = {
@@ -132,6 +138,19 @@ export function getTimerProgress(
 
   const progress = Math.round((elapsedSeconds / finishSeconds) * 100);
   return Math.min(100, Math.max(0, progress));
+}
+
+export function getPourMarkers(
+  steps: BrewStep[],
+  finishSeconds: number,
+): PourMarker[] {
+  return steps
+    .filter((step) => step.type === "pour")
+    .map((step, index) => ({
+      id: step.id,
+      label: String(index + 1),
+      progress: getTimerProgress(step.startSeconds, finishSeconds),
+    }));
 }
 
 export function readRecipeSettings(rawValue: string | null): RecipeSettings {
