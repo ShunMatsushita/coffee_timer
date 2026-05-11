@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="46 Method Timer maskable icon">
+  <rect width="512" height="512" fill="#ff8a00"/>
+  <circle cx="256" cy="256" r="176" fill="#ffffff"/>
+  <circle cx="256" cy="256" r="132" fill="none" stroke="#ff8a00" stroke-width="22" stroke-linecap="round"/>
+  <path d="M212 238h84c22 0 40 18 40 40s-18 40-40 40h-84z" fill="none" stroke="#1d1d1f" stroke-width="18" stroke-linejoin="round"/>
+  <path d="M336 257h19c19 0 35 16 35 35s-16 35-35 35h-17" fill="none" stroke="#1d1d1f" stroke-width="18" stroke-linecap="round"/>
+  <path d="M210 202c0-24 18-28 18-52M258 202c0-24 18-28 18-52M306 202c0-24 18-28 18-52" fill="none" stroke="#ff8a00" stroke-width="14" stroke-linecap="round"/>
+</svg>

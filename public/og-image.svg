@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="46 Method Timer social preview">
+  <rect width="1200" height="630" fill="#ffffff"/>
+  <rect x="52" y="52" width="1096" height="526" rx="42" fill="#fffaf4" stroke="#eee3d8" stroke-width="3"/>
+  <circle cx="845" cy="315" r="148" fill="#ffffff" stroke="#eee3d8" stroke-width="3"/>
+  <circle cx="845" cy="315" r="112" fill="none" stroke="#ff8a00" stroke-width="18" stroke-linecap="round"/>
+  <path d="M799 301h90c22 0 40 18 40 40s-18 40-40 40h-90z" fill="none" stroke="#1d1d1f" stroke-width="18" stroke-linejoin="round"/>
+  <path d="M929 319h22c21 0 37 16 37 37s-16 37-37 37h-20" fill="none" stroke="#1d1d1f" stroke-width="18" stroke-linecap="round"/>
+  <path d="M796 252c0-27 20-31 20-58M845 252c0-27 20-31 20-58M894 252c0-27 20-31 20-58" fill="none" stroke="#ff8a00" stroke-width="14" stroke-linecap="round"/>
+  <text x="120" y="238" fill="#1d1d1f" font-family="Inter, Arial, sans-serif" font-size="76" font-weight="800">46 Method Timer</text>
+  <text x="124" y="312" fill="#514c47" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="600">A clean coffee brew timer for pour timing.</text>
+  <text x="124" y="382" fill="#ff8a00" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800">1:15 baseline / fitness timer dashboard</text>
+  <line x1="124" y1="430" x2="392" y2="430" stroke="#ff8a00" stroke-width="6" stroke-linecap="round"/>
+</svg>

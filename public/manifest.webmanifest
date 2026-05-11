@@ -1,0 +1,25 @@
+{
+  "name": "46 Method Timer",
+  "short_name": "46 Timer",
+  "description": "A clean 46 method coffee brew timer with pour markers.",
+  "start_url": "/coffee_timer/",
+  "scope": "/coffee_timer/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#ff8a00",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/coffee_timer/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/coffee_timer/maskable-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

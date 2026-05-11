@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="46 Method Timer icon">
+  <rect width="512" height="512" rx="112" fill="#ffffff"/>
+  <rect x="32" y="32" width="448" height="448" rx="92" fill="none" stroke="#f0e7dd" stroke-width="10"/>
+  <circle cx="256" cy="256" r="142" fill="none" stroke="#ff8a00" stroke-width="26" stroke-linecap="round"/>
+  <circle cx="256" cy="256" r="90" fill="#fff7ee" stroke="#f0e7dd" stroke-width="8"/>
+  <path d="M214 238h84c21 0 38 17 38 38s-17 38-38 38h-84z" fill="none" stroke="#1d1d1f" stroke-width="18" stroke-linejoin="round"/>
+  <path d="M336 256h20c19 0 34 15 34 34s-15 34-34 34h-18" fill="none" stroke="#1d1d1f" stroke-width="18" stroke-linecap="round"/>
+  <path d="M208 204c0-24 18-28 18-52M256 204c0-24 18-28 18-52M304 204c0-24 18-28 18-52" fill="none" stroke="#ff8a00" stroke-width="14" stroke-linecap="round"/>
+</svg>
