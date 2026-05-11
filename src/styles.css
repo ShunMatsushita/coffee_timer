@@ -297,33 +297,26 @@ h1 {
 }
 
 .pour-marker {
-  --marker-angle: calc(var(--marker-progress) * 3.6deg);
   position: absolute;
   left: 50%;
   top: 50%;
-  display: grid;
-  place-items: center;
-  width: 20px;
+  width: 3px;
   height: 20px;
-  border: 1px solid #ff8a00;
   border-radius: 999px;
-  color: #ff7a00;
-  background: #fffaf4;
-  font-size: 0.68rem;
-  font-weight: 800;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
+  background: #ff8a00;
   transform:
     translate(-50%, -50%)
     rotate(var(--marker-angle))
-    translateY(calc((min(64vw, 250px) / -2) + 6px))
-    rotate(calc(var(--marker-angle) * -1));
-  box-shadow: 0 2px 8px rgba(255, 138, 0, 0.14);
+    translateY(calc((min(64vw, 250px) / -2) + 10px));
+  transform-origin: center center;
+  box-shadow: 0 2px 8px rgba(255, 138, 0, 0.18);
+  opacity: 0.62;
 }
 
 .active-marker {
-  color: #ffffff;
-  background: #ff8a00;
+  height: 28px;
+  opacity: 1;
+  box-shadow: 0 3px 12px rgba(255, 138, 0, 0.28);
 }
 
 .timer-ring.complete {
@@ -448,14 +441,15 @@ h1 {
   }
 
   .pour-marker {
-    width: 18px;
     height: 18px;
-    font-size: 0.62rem;
     transform:
       translate(-50%, -50%)
       rotate(var(--marker-angle))
-      translateY(calc((min(58vw, 210px) / -2) + 6px))
-      rotate(calc(var(--marker-angle) * -1));
+      translateY(calc((min(58vw, 210px) / -2) + 9px));
+  }
+
+  .active-marker {
+    height: 24px;
   }
 
   .step {

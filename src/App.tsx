@@ -324,12 +324,10 @@ function TimerScreen({
                 key={marker.id}
                 style={
                   {
-                    "--marker-progress": `${marker.progress}%`,
+                    "--marker-angle": `${marker.angleDegrees}deg`,
                   } as CSSProperties
                 }
-              >
-                {marker.label}
-              </span>
+              />
             ))}
           </div>
           <div className="timer-ring-core">

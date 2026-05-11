@@ -100,11 +100,11 @@ describe("getPourMarkers", () => {
     const schedule = buildBrewSchedule(defaultRecipeSettings);
 
     expect(getPourMarkers(schedule.steps, schedule.finishSeconds)).toEqual([
-      { id: "pour-1", label: "1", progress: 0 },
-      { id: "pour-2", label: "2", progress: 20 },
-      { id: "pour-3", label: "3", progress: 40 },
-      { id: "pour-4", label: "4", progress: 60 },
-      { id: "pour-5", label: "5", progress: 80 },
+      { id: "pour-1", label: "1", progress: 0, angleDegrees: 0 },
+      { id: "pour-2", label: "2", progress: 20, angleDegrees: 72 },
+      { id: "pour-3", label: "3", progress: 40, angleDegrees: 144 },
+      { id: "pour-4", label: "4", progress: 60, angleDegrees: 216 },
+      { id: "pour-5", label: "5", progress: 80, angleDegrees: 288 },
     ]);
   });
 });

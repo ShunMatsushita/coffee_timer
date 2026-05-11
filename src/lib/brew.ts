@@ -31,6 +31,7 @@ export type PourMarker = {
   id: string;
   label: string;
   progress: number;
+  angleDegrees: number;
 };
 
 export const recipeStorageKey = "coffee46Timer.recipe.v1";
@@ -150,6 +151,7 @@ export function getPourMarkers(
       id: step.id,
       label: String(index + 1),
       progress: getTimerProgress(step.startSeconds, finishSeconds),
+      angleDegrees: getTimerProgress(step.startSeconds, finishSeconds) * 3.6,
     }));
 }
 
