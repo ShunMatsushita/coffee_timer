@@ -272,41 +272,106 @@ h1 {
   gap: 10px;
 }
 
-.timer-hero {
+.timer-dashboard {
   display: grid;
   justify-items: center;
-  gap: 6px;
-  min-height: 184px;
-  padding: 22px 16px;
+  gap: 10px;
+  min-height: 250px;
+  padding: 16px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   background:
-    radial-gradient(circle at 50% 0%, rgba(10, 132, 255, 0.28), transparent 48%),
+    radial-gradient(circle at 50% 8%, rgba(10, 132, 255, 0.24), transparent 46%),
     rgba(255, 255, 255, 0.085);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.12),
     0 24px 60px rgba(0, 0, 0, 0.22);
 }
 
+.timer-ring {
+  display: grid;
+  place-items: center;
+  width: min(64vw, 250px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(12, 13, 16, 0.96) 58%, transparent 59%),
+    conic-gradient(#0a84ff var(--progress), rgba(118, 118, 128, 0.24) 0);
+  box-shadow:
+    0 18px 50px rgba(10, 132, 255, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.timer-ring.complete {
+  background:
+    radial-gradient(circle, rgba(12, 13, 16, 0.96) 58%, transparent 59%),
+    conic-gradient(#30d158 var(--progress), rgba(118, 118, 128, 0.24) 0);
+}
+
+.timer-ring-core {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  width: 76%;
+  aspect-ratio: 1;
+  place-content: center;
+  border-radius: 50%;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025)),
+    #111216;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -12px 28px rgba(0, 0, 0, 0.22);
+}
+
 .timer-label {
   color: #64d2ff;
-  font-size: 0.96rem;
+  font-size: 0.82rem;
   font-weight: 760;
 }
 
-.timer-hero strong {
+.timer-ring-core strong {
   color: #ffffff;
-  font-size: clamp(3.3rem, 23vw, 5.5rem);
+  font-size: clamp(2.6rem, 17vw, 4.2rem);
   font-weight: 780;
   line-height: 0.95;
   letter-spacing: 0;
 }
 
-.timer-hero p {
+.timer-ring-core small {
+  color: #8e8e93;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.timer-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+}
+
+.timer-stats div {
+  display: grid;
+  gap: 2px;
+  min-height: 58px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.timer-stats span {
+  color: #8e8e93;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.timer-stats strong {
   margin: 0;
-  color: #d1d1d6;
-  font-size: 1rem;
-  font-weight: 650;
+  color: #f5f5f7;
+  font-size: 1.16rem;
+  font-weight: 780;
 }
 
 .timer-controls {
@@ -347,6 +412,15 @@ h1 {
     padding-block: 18px;
   }
 
+  .timer-dashboard {
+    min-height: 222px;
+    padding: 12px;
+  }
+
+  .timer-ring {
+    width: min(58vw, 210px);
+  }
+
   .step {
     min-height: 46px;
     padding-block: 6px;
@@ -360,6 +434,8 @@ h1 {
   .metric,
   .step,
   .timer-hero,
+  .timer-dashboard,
+  .timer-stats div,
   .timer-controls button:last-child {
     backdrop-filter: blur(24px) saturate(1.35);
   }

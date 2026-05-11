@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import {
   buildBrewSchedule,
   formatTime,
   getActiveStepIndex,
+  getTimerProgress,
   readRecipeSettings,
   recipeStorageKey,
   serializeRecipeSettings,
@@ -35,6 +36,7 @@ export default function App() {
   const schedule = useMemo(() => buildBrewSchedule(settings), [settings]);
   const activeStepIndex = getActiveStepIndex(schedule.steps, elapsedSeconds);
   const activeStep = schedule.steps[activeStepIndex];
+  const progress = getTimerProgress(elapsedSeconds, schedule.finishSeconds);
   const nextPour = schedule.steps
     .slice(activeStepIndex)
     .find((step) => step.type === "pour" && step.startSeconds >= elapsedSeconds);
@@ -140,6 +142,7 @@ export default function App() {
           onReset={resetTimer}
           onStart={startTimer}
           schedule={schedule}
+          progress={progress}
           status={timerStatus}
         />
       )}
@@ -277,6 +280,7 @@ type TimerScreenProps = {
   onPause: () => void;
   onReset: () => void;
   onStart: () => void;
+  progress: number;
   schedule: ReturnType<typeof buildBrewSchedule>;
   status: TimerStatus;
 };
@@ -289,23 +293,45 @@ function TimerScreen({
   onPause,
   onReset,
   onStart,
+  progress,
   schedule,
   status,
 }: TimerScreenProps) {
+  const ringStyle = {
+    "--progress": `${progress}%`,
+  } as CSSProperties;
+
   return (
     <section className="screen timer-screen">
-      <section className="timer-hero" aria-live="polite">
-        <span className="timer-label">
-          {status === "completed" ? "抽出完了" : activeStepLabel}
-        </span>
-        <strong>{formatTime(elapsedSeconds)}</strong>
-        <p>
-          {status === "completed"
-            ? "おつかれさまでした"
-            : nextPourGram
-              ? `次に注ぐ湯量 ${nextPourGram}g`
-              : "ドリッパーを外す"}
-        </p>
+      <section className="timer-dashboard" aria-live="polite">
+        <div
+          className={status === "completed" ? "timer-ring complete" : "timer-ring"}
+          style={ringStyle}
+        >
+          <div className="timer-ring-core">
+            <span className="timer-label">
+              {status === "completed" ? "抽出完了" : activeStepLabel}
+            </span>
+            <strong>{formatTime(elapsedSeconds)}</strong>
+            <small>{progress}%</small>
+          </div>
+        </div>
+        <div className="timer-stats">
+          <div>
+            <span>Next</span>
+            <strong>
+              {status === "completed"
+                ? "Done"
+                : nextPourGram
+                  ? `${nextPourGram}g`
+                  : "Finish"}
+            </strong>
+          </div>
+          <div>
+            <span>Finish</span>
+            <strong>{formatTime(schedule.finishSeconds)}</strong>
+          </div>
+        </div>
       </section>
 
       <div className="timer-controls">

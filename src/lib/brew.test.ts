@@ -4,6 +4,7 @@ import {
   defaultRecipeSettings,
   formatTime,
   getActiveStepIndex,
+  getTimerProgress,
   readRecipeSettings,
 } from "./brew";
 
@@ -76,6 +77,20 @@ describe("getActiveStepIndex", () => {
     expect(getActiveStepIndex(schedule.steps, 0)).toBe(0);
     expect(getActiveStepIndex(schedule.steps, 89)).toBe(1);
     expect(getActiveStepIndex(schedule.steps, 225)).toBe(5);
+  });
+});
+
+describe("getTimerProgress", () => {
+  it("returns a clamped progress percentage", () => {
+    expect(getTimerProgress(-10, 225)).toBe(0);
+    expect(getTimerProgress(0, 225)).toBe(0);
+    expect(getTimerProgress(112, 225)).toBe(50);
+    expect(getTimerProgress(225, 225)).toBe(100);
+    expect(getTimerProgress(300, 225)).toBe(100);
+  });
+
+  it("returns 100 when finish time is zero", () => {
+    expect(getTimerProgress(10, 0)).toBe(100);
   });
 });
 

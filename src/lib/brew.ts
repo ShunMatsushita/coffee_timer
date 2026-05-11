@@ -122,6 +122,18 @@ export function getActiveStepIndex(
   }, 0);
 }
 
+export function getTimerProgress(
+  elapsedSeconds: number,
+  finishSeconds: number,
+): number {
+  if (finishSeconds <= 0) {
+    return 100;
+  }
+
+  const progress = Math.round((elapsedSeconds / finishSeconds) * 100);
+  return Math.min(100, Math.max(0, progress));
+}
+
 export function readRecipeSettings(rawValue: string | null): RecipeSettings {
   if (!rawValue) {
     return defaultRecipeSettings;
