@@ -4,6 +4,7 @@ import {
   defaultRecipeSettings,
   formatTime,
   getActiveStepIndex,
+  getActiveTargetWaterGram,
   getPourMarkers,
   getTimerProgress,
   readRecipeSettings,
@@ -14,7 +15,7 @@ describe("buildBrewSchedule", () => {
     const schedule = buildBrewSchedule(defaultRecipeSettings);
 
     expect(schedule.totalWaterGram).toBe(300);
-    expect(schedule.temperatureLabel).toBe("88〜92℃");
+    expect(schedule.temperatureLabel).toBe("88-92C");
     expect(schedule.steps.map((step) => step.startSeconds)).toEqual([
       0, 45, 90, 135, 180, 225,
     ]);
@@ -26,7 +27,14 @@ describe("buildBrewSchedule", () => {
       60,
       undefined,
     ]);
-    expect(schedule.steps.at(-1)?.label).toBe("ドリッパーを外す");
+    expect(schedule.steps.map((step) => step.label)).toEqual([
+      "Pour 1",
+      "Pour 2",
+      "Pour 3",
+      "Pour 4",
+      "Pour 5",
+      "Drawdown",
+    ]);
   });
 
   it("adjusts the final pour so rounded amounts equal total water", () => {
@@ -44,7 +52,7 @@ describe("buildBrewSchedule", () => {
 
     expect(schedule.totalWaterGram).toBe(255);
     expect(pourTotal).toBe(255);
-    expect(schedule.temperatureLabel).toBe("92〜94℃");
+    expect(schedule.temperatureLabel).toBe("92-94C");
   });
 
   it("uses the 4-pour timings and dark roast temperature", () => {
@@ -59,7 +67,7 @@ describe("buildBrewSchedule", () => {
     expect(schedule.steps.map((step) => step.startSeconds)).toEqual([
       0, 50, 100, 150, 200,
     ]);
-    expect(schedule.temperatureLabel).toBe("84〜88℃");
+    expect(schedule.temperatureLabel).toBe("84-88C");
   });
 });
 
@@ -92,6 +100,23 @@ describe("getTimerProgress", () => {
 
   it("returns 100 when finish time is zero", () => {
     expect(getTimerProgress(10, 0)).toBe(100);
+  });
+});
+
+describe("getActiveTargetWaterGram", () => {
+  it("returns the cumulative target for the active pour", () => {
+    const schedule = buildBrewSchedule(defaultRecipeSettings);
+
+    expect(getActiveTargetWaterGram(schedule.steps[0], schedule.totalWaterGram)).toBe(60);
+    expect(getActiveTargetWaterGram(schedule.steps[1], schedule.totalWaterGram)).toBe(120);
+  });
+
+  it("returns total water during drawdown", () => {
+    const schedule = buildBrewSchedule(defaultRecipeSettings);
+
+    expect(
+      getActiveTargetWaterGram(schedule.steps.at(-1)!, schedule.totalWaterGram),
+    ).toBe(300);
   });
 });
 

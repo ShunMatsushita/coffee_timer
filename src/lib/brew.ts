@@ -56,9 +56,9 @@ const pourStartTimes: Record<PourCount, number[]> = {
 };
 
 const temperatureLabels: Record<RoastLevel, string> = {
-  light: "92〜94℃",
-  medium: "88〜92℃",
-  dark: "84〜88℃",
+  light: "92-94C",
+  medium: "88-92C",
+  dark: "84-88C",
 };
 
 export function buildBrewSchedule(settings: RecipeSettings): BrewSchedule {
@@ -75,7 +75,7 @@ export function buildBrewSchedule(settings: RecipeSettings): BrewSchedule {
 
     return {
       id: `pour-${index + 1}`,
-      label: `${index + 1}投目`,
+      label: `Pour ${index + 1}`,
       type: "pour",
       startSeconds,
       waterGram,
@@ -87,7 +87,7 @@ export function buildBrewSchedule(settings: RecipeSettings): BrewSchedule {
     ...pourSteps,
     {
       id: "remove-dripper",
-      label: "ドリッパーを外す",
+      label: "Drawdown",
       type: "removeDripper",
       startSeconds: removeDripperTime,
     },
@@ -139,6 +139,13 @@ export function getTimerProgress(
 
   const progress = Math.round((elapsedSeconds / finishSeconds) * 100);
   return Math.min(100, Math.max(0, progress));
+}
+
+export function getActiveTargetWaterGram(
+  activeStep: BrewStep,
+  totalWaterGram: number,
+): number {
+  return activeStep.cumulativeWaterGram ?? totalWaterGram;
 }
 
 export function getPourMarkers(

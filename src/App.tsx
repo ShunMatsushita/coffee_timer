@@ -3,6 +3,7 @@ import {
   buildBrewSchedule,
   formatTime,
   getActiveStepIndex,
+  getActiveTargetWaterGram,
   getPourMarkers,
   getTimerProgress,
   readRecipeSettings,
@@ -19,9 +20,9 @@ import {
 const ratioOptions: BrewRatio[] = [14, 15, 16];
 const pourCountOptions: PourCount[] = [4, 5, 6];
 const roastOptions: Array<{ value: RoastLevel; label: string }> = [
-  { value: "light", label: "浅煎り" },
-  { value: "medium", label: "中煎り" },
-  { value: "dark", label: "深煎り" },
+  { value: "light", label: "Light" },
+  { value: "medium", label: "Medium" },
+  { value: "dark", label: "Dark" },
 ];
 
 export default function App() {
@@ -39,9 +40,10 @@ export default function App() {
   const activeStep = schedule.steps[activeStepIndex];
   const progress = getTimerProgress(elapsedSeconds, schedule.finishSeconds);
   const pourMarkers = getPourMarkers(schedule.steps, schedule.finishSeconds);
-  const nextPour = schedule.steps
-    .slice(activeStepIndex)
-    .find((step) => step.type === "pour" && step.startSeconds >= elapsedSeconds);
+  const targetWaterGram = getActiveTargetWaterGram(
+    activeStep,
+    schedule.totalWaterGram,
+  );
 
   useEffect(() => {
     window.localStorage.setItem(
@@ -108,22 +110,22 @@ export default function App() {
       <header className="app-header">
         <div>
           <p className="eyebrow">46 Method</p>
-          <h1>抽出タイマー</h1>
+          <h1>46 Brew Timer</h1>
         </div>
-        <div className="view-switch" aria-label="画面切り替え">
+        <div className="view-switch" aria-label="View switcher">
           <button
             className={viewMode === "settings" ? "active" : ""}
             type="button"
             onClick={() => setViewMode("settings")}
           >
-            設定
+            Setup
           </button>
           <button
             className={viewMode === "timer" ? "active" : ""}
             type="button"
             onClick={() => setViewMode("timer")}
           >
-            タイマー
+            Timer
           </button>
         </div>
       </header>
@@ -137,16 +139,19 @@ export default function App() {
       ) : (
         <TimerScreen
           activeStepId={activeStep.id}
-          activeStepLabel={activeStep.label}
+          activeStepLabel={
+            statusLabel(timerStatus, activeStep.label)
+          }
+          currentPourGram={activeStep.waterGram}
           elapsedSeconds={elapsedSeconds}
-          nextPourGram={nextPour?.waterGram}
           onPause={pauseTimer}
           onReset={resetTimer}
           onStart={startTimer}
           pourMarkers={pourMarkers}
-          schedule={schedule}
           progress={progress}
+          schedule={schedule}
           status={timerStatus}
+          targetWaterGram={targetWaterGram}
         />
       )}
     </main>
@@ -163,15 +168,15 @@ function SettingsScreen({ settings, onChange, onStart }: SettingsScreenProps) {
   const schedule = buildBrewSchedule(settings);
 
   return (
-    <section className="screen">
+    <section className="screen setup-screen">
       <RecipeForm settings={settings} onChange={onChange} />
-      <section className="summary-grid" aria-label="抽出サマリー">
+      <section className="summary-grid" aria-label="Brew summary">
         <div className="metric">
-          <span>総湯量</span>
+          <span>Total Water</span>
           <strong>{schedule.totalWaterGram}g</strong>
         </div>
         <div className="metric">
-          <span>温度目安</span>
+          <span>Target Temp</span>
           <strong>{schedule.temperatureLabel}</strong>
         </div>
       </section>
@@ -180,7 +185,7 @@ function SettingsScreen({ settings, onChange, onStart }: SettingsScreenProps) {
         steps={schedule.steps}
       />
       <button className="primary-action" type="button" onClick={onStart}>
-        タイマーを開始
+        Start Timer
       </button>
     </section>
   );
@@ -194,8 +199,8 @@ type RecipeFormProps = {
 function RecipeForm({ settings, onChange }: RecipeFormProps) {
   return (
     <form className="recipe-form">
-      <label className="field">
-        <span>豆量</span>
+      <label className="field beans-field">
+        <span>Beans</span>
         <div className="number-input">
           <input
             min={1}
@@ -214,7 +219,7 @@ function RecipeForm({ settings, onChange }: RecipeFormProps) {
       </label>
 
       <SegmentedControl
-        label="抽出比率"
+        label="Ratio"
         options={ratioOptions.map((ratio) => ({
           value: ratio,
           label: `1:${ratio}`,
@@ -224,17 +229,17 @@ function RecipeForm({ settings, onChange }: RecipeFormProps) {
       />
 
       <SegmentedControl
-        label="投数"
+        label="Pours"
         options={pourCountOptions.map((pourCount) => ({
           value: pourCount,
-          label: `${pourCount}投`,
+          label: String(pourCount),
         }))}
         value={settings.pourCount}
         onChange={(pourCount) => onChange({ ...settings, pourCount })}
       />
 
       <SegmentedControl
-        label="焙煎度"
+        label="Roast"
         options={roastOptions}
         value={settings.roastLevel}
         onChange={(roastLevel) => onChange({ ...settings, roastLevel })}
@@ -278,8 +283,8 @@ function SegmentedControl<T extends string | number>({
 type TimerScreenProps = {
   activeStepId: string;
   activeStepLabel: string;
+  currentPourGram?: number;
   elapsedSeconds: number;
-  nextPourGram?: number;
   onPause: () => void;
   onReset: () => void;
   onStart: () => void;
@@ -287,13 +292,14 @@ type TimerScreenProps = {
   progress: number;
   schedule: ReturnType<typeof buildBrewSchedule>;
   status: TimerStatus;
+  targetWaterGram: number;
 };
 
 function TimerScreen({
   activeStepId,
   activeStepLabel,
+  currentPourGram,
   elapsedSeconds,
-  nextPourGram,
   onPause,
   onReset,
   onStart,
@@ -301,6 +307,7 @@ function TimerScreen({
   progress,
   schedule,
   status,
+  targetWaterGram,
 }: TimerScreenProps) {
   const ringStyle = {
     "--progress": `${progress}%`,
@@ -331,28 +338,19 @@ function TimerScreen({
             ))}
           </div>
           <div className="timer-ring-core">
-            <span className="timer-label">
-              {status === "completed" ? "抽出完了" : activeStepLabel}
-            </span>
+            <span className="timer-label">{activeStepLabel}</span>
             <strong>{formatTime(elapsedSeconds)}</strong>
-            <small>{progress}%</small>
+            <div className="target-pill">
+              <span>Target Water</span>
+              <b>{targetWaterGram}g</b>
+            </div>
           </div>
         </div>
-        <div className="timer-stats">
-          <div>
-            <span>Next</span>
-            <strong>
-              {status === "completed"
-                ? "Done"
-                : nextPourGram
-                  ? `${nextPourGram}g`
-                  : "Finish"}
-            </strong>
-          </div>
-          <div>
-            <span>Finish</span>
-            <strong>{formatTime(schedule.finishSeconds)}</strong>
-          </div>
+
+        <div className="timer-meta-grid">
+          <StatCard label="Current Pour" value={currentPourGram ? `${currentPourGram}g` : "Done"} />
+          <StatCard label="Total Water" value={`${schedule.totalWaterGram}g`} emphasized />
+          <StatCard label="Finish" value={formatTime(schedule.finishSeconds)} />
         </div>
       </section>
 
@@ -376,6 +374,21 @@ function TimerScreen({
   );
 }
 
+type StatCardProps = {
+  label: string;
+  value: string;
+  emphasized?: boolean;
+};
+
+function StatCard({ label, value, emphasized = false }: StatCardProps) {
+  return (
+    <div className={emphasized ? "stat-card emphasized-stat" : "stat-card"}>
+      <span>{label}</span>
+      <strong>{value}</strong>
+    </div>
+  );
+}
+
 type SchedulePreviewProps = {
   activeStepId: string;
   steps: ReturnType<typeof buildBrewSchedule>["steps"];
@@ -383,7 +396,7 @@ type SchedulePreviewProps = {
 
 function SchedulePreview({ activeStepId, steps }: SchedulePreviewProps) {
   return (
-    <section className="step-list" aria-label="抽出スケジュール">
+    <section className="step-list" aria-label="Brew schedule">
       {steps.map((step) => (
         <article
           className={step.id === activeStepId ? "step active-step" : "step"}
@@ -396,13 +409,21 @@ function SchedulePreview({ activeStepId, steps }: SchedulePreviewProps) {
           {step.type === "pour" ? (
             <p>
               {step.waterGram}g
-              <small>累計 {step.cumulativeWaterGram}g</small>
+              <small>Target {step.cumulativeWaterGram}g</small>
             </p>
           ) : (
-            <p>Finish</p>
+            <p>Done</p>
           )}
         </article>
       ))}
     </section>
   );
+}
+
+function statusLabel(status: TimerStatus, stepLabel: string): string {
+  if (status === "completed") {
+    return "Complete";
+  }
+
+  return stepLabel;
 }
