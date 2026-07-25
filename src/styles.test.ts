@@ -24,4 +24,9 @@ describe("neumorphism 2.0 styling", () => {
     expect(styles).toMatch(/\.timer-ring\s*{[^}]*var\(--shadow-floating\)/s);
     expect(styles).toMatch(/\.timer-ring-core\s*{[^}]*var\(--shadow-pressed\)/s);
   });
+
+  it("promotes target water as a standalone timer panel", () => {
+    expect(styles).toMatch(/\.water-target-panel\s*{[^}]*var\(--shadow-raised\)/s);
+    expect(styles).toMatch(/\.water-target-value\s*{[^}]*var\(--accent-strong\)/s);
+  });
 });

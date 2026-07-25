@@ -341,10 +341,16 @@ function TimerScreen({
             <span className="timer-label">{activeStepLabel}</span>
             <strong>{formatTime(elapsedSeconds)}</strong>
             <div className="target-pill">
-              <span>Target Water</span>
+              <span>Target</span>
               <b>{targetWaterGram}g</b>
             </div>
           </div>
+        </div>
+
+        <div className="water-target-panel">
+          <span>Target Water</span>
+          <strong className="water-target-value">{targetWaterGram}g</strong>
+          <p>Aim for this total by the end of the current pour.</p>
         </div>
 
         <div className="timer-meta-grid">

@@ -297,9 +297,9 @@ h1 {
 .timer-dashboard {
   display: grid;
   justify-items: center;
-  gap: 14px;
-  min-height: 330px;
-  padding: 18px 16px 16px;
+  gap: 10px;
+  min-height: 312px;
+  padding: 14px 16px;
   border: 1px solid var(--line-soft);
   border-radius: 8px;
   background:
@@ -312,7 +312,7 @@ h1 {
   display: grid;
   place-items: center;
   position: relative;
-  width: min(68vw, 268px);
+  width: min(66vw, 248px);
   aspect-ratio: 1;
   border-radius: 50%;
   background:
@@ -341,7 +341,7 @@ h1 {
   transform:
     translate(-50%, -50%)
     rotate(var(--marker-angle))
-    translateY(calc((min(68vw, 268px) / -2) + 10px));
+    translateY(calc((min(66vw, 248px) / -2) + 10px));
   transform-origin: center center;
   box-shadow: 0 2px 8px rgba(255, 138, 0, 0.18);
   opacity: 0.62;
@@ -424,6 +424,45 @@ h1 {
   line-height: 1.12;
 }
 
+.water-target-panel {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  width: min(100%, 360px);
+  min-height: 72px;
+  padding: 9px 16px;
+  border: 1px solid var(--line-soft);
+  border-radius: 8px;
+  background: linear-gradient(145deg, #fff6ea, var(--surface-raised));
+  box-shadow: var(--shadow-raised);
+}
+
+.water-target-panel span {
+  color: #8a6a45;
+  font-size: 0.72rem;
+  font-weight: 780;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.water-target-value {
+  color: var(--accent-strong);
+  font-size: clamp(1.7rem, 8vw, 2.3rem);
+  font-variant-numeric: tabular-nums;
+  font-weight: 840;
+  line-height: 1;
+}
+
+.water-target-panel p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.74rem;
+  font-weight: 650;
+  line-height: 1.2;
+  text-align: center;
+}
+
 .timer-meta-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -434,8 +473,8 @@ h1 {
 .stat-card {
   display: grid;
   gap: 2px;
-  min-height: 62px;
-  padding: 10px 9px;
+  min-height: 56px;
+  padding: 8px 9px;
   border: 1px solid var(--line-soft);
   border-radius: 8px;
   background: var(--surface-raised);
@@ -494,6 +533,7 @@ h1 {
   }
 
   .app-shell {
+    padding-bottom: 12px;
     padding-top: 12px;
   }
 
@@ -540,6 +580,15 @@ h1 {
     min-height: 54px;
     padding-block: 8px;
   }
+
+  .water-target-panel {
+    min-height: 72px;
+    padding-block: 9px;
+  }
+
+  .water-target-value {
+    font-size: clamp(1.65rem, 8vw, 2.2rem);
+  }
 }
 
 @supports (backdrop-filter: blur(24px)) {
@@ -550,6 +599,7 @@ h1 {
   .step,
   .timer-hero,
   .timer-dashboard,
+  .water-target-panel,
   .stat-card,
   .timer-controls button:last-child {
     backdrop-filter: blur(24px) saturate(1.35);
